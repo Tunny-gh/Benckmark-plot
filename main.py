@@ -10,12 +10,13 @@ from optimization_functions import FUNCTIONS
 from visualization import plot_function_3d
 
 
-def plot_all_functions(backend="matplotlib"):
+def plot_all_functions(backend="matplotlib", save_figs=False):
     """
     Plot all optimization benchmark functions using the function registry
 
     Args:
         backend: 'matplotlib' or 'plotly' for plotting backend
+        save_figs: whether to save figures to figs folder
     """
     for func_name, func_info in FUNCTIONS.items():
         print(f"Plotting {func_info['name']} using {backend}...")
@@ -33,15 +34,17 @@ def plot_all_functions(backend="matplotlib"):
             optimal_point=func_info["optimal"],
             levels=levels,
             backend=backend,
+            save_figs=save_figs,
         )
 
 
-def main(backend="plotly"):
+def main(backend="plotly", save_figs=False):
     """
     Main function
 
     Args:
         backend: 'matplotlib' or 'plotly' for plotting backend
+        save_figs: whether to save figures to figs folder
     """
     print("=== Optimization Benchmark Functions Visualization ===")
     print("This program plots 6 common optimization benchmark functions:")
@@ -62,7 +65,7 @@ def main(backend="plotly"):
     print()
 
     # Plot all functions using the specified backend
-    plot_all_functions(backend=backend)
+    plot_all_functions(backend=backend, save_figs=save_figs)
 
     print("All optimization function graphs have been plotted successfully!")
     print(
@@ -73,14 +76,24 @@ def main(backend="plotly"):
 if __name__ == "__main__":
     import sys
 
-    # Parse command line arguments for backend selection
+    # Parse command line arguments for backend selection and save option
     backend = "matplotlib"  # default
-    if len(sys.argv) > 1:
-        backend_arg = sys.argv[1].lower()
-        if backend_arg in ["matplotlib", "plotly"]:
-            backend = backend_arg
+    save_figs = False  # default
+    
+    for arg in sys.argv[1:]:
+        arg_lower = arg.lower()
+        if arg_lower in ["matplotlib", "plotly"]:
+            backend = arg_lower
+        elif arg_lower in ["--save", "-s"]:
+            save_figs = True
         else:
-            print(f"Unknown backend: {sys.argv[1]}. Using default 'matplotlib'.")
+            print(f"Unknown argument: {arg}")
+            print("Usage: python main.py [matplotlib|plotly] [--save|-s]")
             print("Available backends: matplotlib, plotly")
+            print("Use --save or -s to save figures to figs folder")
+            sys.exit(1)
 
-    main(backend=backend)
+    if save_figs:
+        print("Figures will be saved to 'figs' folder")
+    
+    main(backend=backend, save_figs=save_figs)
