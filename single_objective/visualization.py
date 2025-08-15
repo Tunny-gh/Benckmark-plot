@@ -38,7 +38,7 @@ def plot_function_3d_matplotlib(
 
     # Top view (looking down from above, elev=90, azim=0) - Orthographic
     ax1 = fig.add_subplot(221, projection="3d")
-    surf1 = ax1.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
+    ax1.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
     ax1.view_init(elev=90, azim=0)
     ax1.set_proj_type("ortho")  # Orthographic projection
     ax1.set_xlabel("X")
@@ -56,7 +56,7 @@ def plot_function_3d_matplotlib(
 
     # Front view (elev=0, azim=0) - Orthographic
     ax2 = fig.add_subplot(222, projection="3d")
-    surf2 = ax2.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
+    ax2.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
     ax2.view_init(elev=0, azim=0)
     ax2.set_proj_type("ortho")  # Orthographic projection
     ax2.set_xlabel("X")
@@ -74,7 +74,7 @@ def plot_function_3d_matplotlib(
 
     # Side view (elev=0, azim=90) - Orthographic
     ax3 = fig.add_subplot(223, projection="3d")
-    surf3 = ax3.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
+    ax3.plot_surface(X, Y, Z, cmap="viridis", alpha=0.8)
     ax3.view_init(elev=0, azim=90)
     ax3.set_proj_type("ortho")  # Orthographic projection
     ax3.set_xlabel("X")
@@ -114,27 +114,33 @@ def plot_function_3d_matplotlib(
     )
 
     # Add colorbar to the figure with proper positioning
-    cbar = fig.colorbar(
+    fig.colorbar(
         surf4, ax=[ax1, ax2, ax3, ax4], shrink=0.7, pad=0.15, fraction=0.04, aspect=25
     )
-    
+
     # Save figure if requested
     if save_figs:
         # Create figs directory if it doesn't exist
-        os.makedirs('figs', exist_ok=True)
+        os.makedirs("figs", exist_ok=True)
         # Clean filename from title
-        clean_title = title.replace(' ', '_').replace('(', '').replace(')', '').replace('-', '_')
-        filename = f'figs/{clean_title}_3D.png'
-        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        clean_title = (
+            title.replace(" ", "_").replace("(", "").replace(")", "").replace("-", "_")
+        )
+        filename = f"figs/{clean_title}_3D.png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         print(f"Saved 3D plot: {filename}")
-    
+
     plt.show()
 
     # Show separate contour plot
-    plot_contour_matplotlib(func, x_range, y_range, title, optimal_point, levels, save_figs)
+    plot_contour_matplotlib(
+        func, x_range, y_range, title, optimal_point, levels, save_figs
+    )
 
 
-def plot_contour_matplotlib(func, x_range, y_range, title, optimal_point, levels=None, save_figs=False):
+def plot_contour_matplotlib(
+    func, x_range, y_range, title, optimal_point, levels=None, save_figs=False
+):
     """
     Plot contour visualization of a function using matplotlib
 
@@ -172,21 +178,25 @@ def plot_contour_matplotlib(func, x_range, y_range, title, optimal_point, levels
     # plt.colorbar(contour, label="f(x, y)")
 
     plt.tight_layout()
-    
+
     # Save figure if requested
     if save_figs:
         # Create figs directory if it doesn't exist
-        os.makedirs('figs', exist_ok=True)
+        os.makedirs("figs", exist_ok=True)
         # Clean filename from title
-        clean_title = title.replace(' ', '_').replace('(', '').replace(')', '').replace('-', '_')
-        filename = f'figs/{clean_title}_Contour.png'
-        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        clean_title = (
+            title.replace(" ", "_").replace("(", "").replace(")", "").replace("-", "_")
+        )
+        filename = f"figs/{clean_title}_Contour.png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         print(f"Saved contour plot: {filename}")
-    
+
     plt.show()
 
 
-def plot_function_3d_plotly(func, x_range, y_range, title, optimal_point, levels=None, save_figs=False):
+def plot_function_3d_plotly(
+    func, x_range, y_range, title, optimal_point, levels=None, save_figs=False
+):
     """
     Plot 3D visualization with 4 different views using plotly
 
@@ -270,10 +280,12 @@ def plot_function_3d_plotly(func, x_range, y_range, title, optimal_point, levels
     # Save figure if requested
     if save_figs:
         # Create figs directory if it doesn't exist
-        os.makedirs('figs', exist_ok=True)
+        os.makedirs("figs", exist_ok=True)
         # Clean filename from title
-        clean_title = title.replace(' ', '_').replace('(', '').replace(')', '').replace('-', '_')
-        filename = f'figs/{clean_title}_3D.html'
+        clean_title = (
+            title.replace(" ", "_").replace("(", "").replace(")", "").replace("-", "_")
+        )
+        filename = f"figs/{clean_title}_3D.html"
         fig.write_html(filename)
         print(f"Saved 3D plot: {filename}")
 
@@ -283,7 +295,9 @@ def plot_function_3d_plotly(func, x_range, y_range, title, optimal_point, levels
     plot_contour_plotly(func, x_range, y_range, title, optimal_point, levels, save_figs)
 
 
-def plot_contour_plotly(func, x_range, y_range, title, optimal_point, levels=None, save_figs=False):
+def plot_contour_plotly(
+    func, x_range, y_range, title, optimal_point, levels=None, save_figs=False
+):
     """
     Plot contour visualization of a function using plotly
 
@@ -353,10 +367,12 @@ def plot_contour_plotly(func, x_range, y_range, title, optimal_point, levels=Non
     # Save figure if requested
     if save_figs:
         # Create figs directory if it doesn't exist
-        os.makedirs('figs', exist_ok=True)
+        os.makedirs("figs", exist_ok=True)
         # Clean filename from title
-        clean_title = title.replace(' ', '_').replace('(', '').replace(')', '').replace('-', '_')
-        filename = f'figs/{clean_title}_Contour.html'
+        clean_title = (
+            title.replace(" ", "_").replace("(", "").replace(")", "").replace("-", "_")
+        )
+        filename = f"figs/{clean_title}_Contour.html"
         fig.write_html(filename)
         print(f"Saved contour plot: {filename}")
 
@@ -364,7 +380,14 @@ def plot_contour_plotly(func, x_range, y_range, title, optimal_point, levels=Non
 
 
 def plot_function_3d(
-    func, x_range, y_range, title, optimal_point, levels=None, backend="matplotlib", save_figs=False
+    func,
+    x_range,
+    y_range,
+    title,
+    optimal_point,
+    levels=None,
+    backend="matplotlib",
+    save_figs=False,
 ):
     """
     Generic function to plot 3D visualization with selectable backend
@@ -380,7 +403,9 @@ def plot_function_3d(
         save_figs: whether to save figures to figs folder
     """
     if backend.lower() == "plotly":
-        plot_function_3d_plotly(func, x_range, y_range, title, optimal_point, levels, save_figs)
+        plot_function_3d_plotly(
+            func, x_range, y_range, title, optimal_point, levels, save_figs
+        )
     elif backend.lower() == "matplotlib":
         plot_function_3d_matplotlib(
             func, x_range, y_range, title, optimal_point, levels, save_figs
@@ -390,7 +415,14 @@ def plot_function_3d(
 
 
 def plot_contour(
-    func, x_range, y_range, title, optimal_point, levels=None, backend="matplotlib", save_figs=False
+    func,
+    x_range,
+    y_range,
+    title,
+    optimal_point,
+    levels=None,
+    backend="matplotlib",
+    save_figs=False,
 ):
     """
     Generic function to plot contour visualization with selectable backend
@@ -406,9 +438,13 @@ def plot_contour(
         save_figs: whether to save figures to figs folder
     """
     if backend.lower() == "plotly":
-        plot_contour_plotly(func, x_range, y_range, title, optimal_point, levels, save_figs)
+        plot_contour_plotly(
+            func, x_range, y_range, title, optimal_point, levels, save_figs
+        )
     elif backend.lower() == "matplotlib":
-        plot_contour_matplotlib(func, x_range, y_range, title, optimal_point, levels, save_figs)
+        plot_contour_matplotlib(
+            func, x_range, y_range, title, optimal_point, levels, save_figs
+        )
     else:
         raise ValueError(f"Unknown backend: {backend}. Use 'matplotlib' or 'plotly'.")
 

@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []

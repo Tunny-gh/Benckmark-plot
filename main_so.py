@@ -6,8 +6,8 @@ This program visualizes 6 common optimization benchmark functions using
 """
 
 import numpy as np
-from optimization_functions import FUNCTIONS
-from visualization import plot_function_3d
+from single_objective.optimization_functions import FUNCTIONS
+from single_objective.visualization import plot_function_3d
 
 
 def plot_all_functions(backend="matplotlib", save_figs=False):
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Parse command line arguments for backend selection and save option
     backend = "matplotlib"  # default
     save_figs = False  # default
-    
+
     for arg in sys.argv[1:]:
         arg_lower = arg.lower()
         if arg_lower in ["matplotlib", "plotly"]:
@@ -95,5 +95,5 @@ if __name__ == "__main__":
 
     if save_figs:
         print("Figures will be saved to 'figs' folder")
-    
+
     main(backend=backend, save_figs=save_figs)
