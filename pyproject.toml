@@ -1,0 +1,16 @@
+[project]
+name = "graph"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=1.24.0",
+    "matplotlib>=3.6.0",
+    "plotly>=5.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.9",
+]
